@@ -61,9 +61,16 @@ int find_num_in_pool(int arr[], int arr_size, int num) {
 int x_of_a_kind(int arr[], int arr_size, int num) {
 	qsort(arr, arr_size, sizeof(int), compare_big);
 	int points = 0;
-	for (int i = 0; i < arr_size; i++) {
+	if (num != 5) {
+		for (int i = 0; i < arr_size; i++) {
+			if ((find_num_in_pool(arr, arr_size, arr[i]) / arr[i]) == num) {
+				points += (arr[i] * num);
+				return points;
+			}
+		}
+	} else {
 		if ((find_num_in_pool(arr, arr_size, arr[i]) / arr[i]) == num) {
-			points += (arr[i] * num);
+			points = 50;
 			return points;
 		}
 	}
