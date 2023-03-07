@@ -1,12 +1,12 @@
-#include "Cornel.h"
 
+#include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 #include "Louise.h"
 #include "Hanna.h"
 #include "Carl.h"
-
+#include "Cornel.h"
 
 int sum(int array [])
 {
