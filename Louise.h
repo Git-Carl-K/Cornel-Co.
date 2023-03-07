@@ -46,7 +46,7 @@ int sum_pool(int *dice_pool, int size);
 void print_game_menu();
 
 /*Function to calculate first total*/
-int calculate_top_sum(scoreboard top_column);
+int calculate_first_total(scoreboard top_column);
 
 /*Function to calculate the bonus*/
 int calculate_bonus(scoreboard bonus_score);
