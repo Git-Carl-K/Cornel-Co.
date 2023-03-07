@@ -25,7 +25,7 @@ git commit -m "message"			Merge files and lets you leave a description of your c
 git log					Shows all git history such as commits and merges
 
 ***GIT BRANCHES***
-git clone <url> <folder>                        makes a local copy of remote repository at <url> to local <folder>
+git clone <url> <folder>                       makes a local copy of remote repository at <url> to local <folder>
 
 git branch				Lists all existing branches (and highlights the current)
 git branch <branchName>			Create a branch
