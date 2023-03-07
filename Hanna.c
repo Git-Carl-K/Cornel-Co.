@@ -75,7 +75,7 @@ int x_of_a_kind(int arr[], int arr_size, int num) {
 //(1) array of int's to check
 //(2) the size of the array
 //returns the points collected
-int check_small_straingt(int arr[], int arr_size) {
+int check_small_straigt(int arr[], int arr_size) {
 	qsort(arr, arr_size, sizeof(int), compare_small);
 	int points = 0;
 	if (arr[0] == 1) {
@@ -100,7 +100,7 @@ int check_small_straingt(int arr[], int arr_size) {
 //(1) array of int's to check
 //(2) the size of the array
 //returns the points collected
-int check_large_straingt(int arr[], int arr_size) {
+int check_large_straigt(int arr[], int arr_size) {
 	qsort(arr, arr_size, sizeof(int), compare_big);
 	int points = 0;
 	if (arr[0] == 6) {
