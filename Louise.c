@@ -79,3 +79,45 @@ void print_game_menu() {
 	}
 
 }
+
+/*Function to calculate the first total
+it takes the top_column of the scoreboard struct as an argument*/
+int calculate_top_sum(scoreboard top_column){
+	int top_sum = 0;
+
+	for (int i = 0; i < 6; i++)
+	{
+		int field_value = *((int*)&top_column.score + i); //Access the i-th field in the struct
+		top_sum += field_value;
+	}
+	top_column.score.first_total = top_sum;
+	return top_sum;
+}
+
+/*Function to calculate the bonus
+it takes the of bonus of the scoreboard struct as an argument*/
+int calculate_bonus(scoreboard bonus_score){
+	bonus_score.score.bonus = 50;
+
+	if (calculate_top_sum(bonus_score) >= 63)
+	{
+		return bonus_score.score.bonus;
+	} else {
+		return 0;
+	}
+}
+
+/*Function to calculate the total score
+it takes the total_score of the scoreboard struct as an argument*/
+int calculate_total_score(scoreboard bottom_column)
+{
+	int bottom_sum = bottom_column.score.first_total + bottom_column.score.bonus;
+
+	for (int i = 8; i <= 18; i++)
+	{
+		int field_value = *((int*)&bottom_column.score + i);
+		bottom_sum += field_value;
+	}
+	bottom_column.score.total_score = bottom_sum;
+	return bottom_sum;
+}
