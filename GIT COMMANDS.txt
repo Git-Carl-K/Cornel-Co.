@@ -1,0 +1,44 @@
+***GIT VERSION***
+git --version				prints the current version of git
+
+***GIT SETTINGS***
+git config -l				prints a list of git configurations/settings
+git config --global --edit		opens a file with global configurations so you can edit
+
+***START A GIT PROJECT***
+git init					When creating a new project you need to initialize git. Navigate to the project folder and run this command.
+
+***GIT COMMIT***
+git status					Shows the status of all files (staged, untracked, modified etc.)
+
+git add <filename>			Add files to the “staging area”
+
+git restore <filename>			Discard (deletes) changes in the file
+git restore --staged <filename>	Unstages a file
+
+git rm --cached <filename>		Untrack a file
+git rm -r --cached <folder>		Untrack a folder
+
+git commit					Merge files from staging area to local repository
+git commit -m "message"			Merge files and lets you leave a description of your changes
+
+git log					Shows all git history such as commits and merges
+
+***GIT BRANCHES***
+git branch					Lists all existing branches (and highlights the current)
+git branch <branchName>			Create a branch
+git branch -M <newBranchName>		Rename current branch
+git branch -d <branch>			Delete the branch
+
+git checkout -b <branchName> 		Create a branch and switches to it
+git checkout <branchName> 		Switch to a branch
+
+***GIT AND GITHUB***
+git remote -v				See active remote repositories
+git remote add <origin> <url>	Connect your project with the remote repository at <url> and locally call it <origin>
+git remote set-url <origin> <url>	Change remote repository called <origin> to the repository at <url>
+
+git pull <origin>		Pull a copy from origin and merge with your current branch
+git pull --rebase <origin>	Pull a copy from origin to your current branch and add all your commits
+
+git push <remote> <branch>		Push changes to remote from branch
