@@ -35,7 +35,7 @@ typedef struct scoreboard_column {
 /*Struct that contains a player-name and a scoreboard for that player*/
 typedef struct scoreboard {
 	char name[20];
-	struct scoreboard_column;
+	scoreboard_column score;
 
 }scoreboard;
 
