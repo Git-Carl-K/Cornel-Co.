@@ -1,11 +1,4 @@
-=======
-/*
- * Hanna.h
- *
- *  Created on: 7 Mar 2023
- *      Author: call3
- */
-
+/*----------------------------------FUNCTION----------------------------------*/
 int compare_small(const void * a, const void * b);
 int compare_big(const void * a, const void * b);
 void print_pool(int arr[], int arr_size);
