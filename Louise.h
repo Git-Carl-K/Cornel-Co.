@@ -15,7 +15,7 @@ typedef struct scoreboard_column {
 	int threes;
 	int fours;
 	int fives;
-	int six;
+	int sixes;
 	int first_total;
 	int bonus;
 	int pair;
