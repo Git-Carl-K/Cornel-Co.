@@ -1,7 +1,8 @@
+#include "Cornel.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include "Cornel.h"
 #include "Louise.h"
 #include "Hanna.h"
 #include "Carl.h"
@@ -22,13 +23,3 @@ int sum(int array [])
 }
 
 
-int main ()
-
-
-{
-
-
-
-
-
-}
