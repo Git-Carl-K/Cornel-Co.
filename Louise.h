@@ -44,3 +44,12 @@ int sum_pool(int *dice_pool, int size);
 
 /*Function to print game menu*/
 void print_game_menu();
+
+/*Function to calculate first total*/
+int calculate_top_sum(scoreboard top_column);
+
+/*Function to calculate the bonus*/
+int calculate_bonus(scoreboard bonus_score);
+
+/*Function to calculate the total score*/
+int calculate_total_score(scoreboard bottom_column);
