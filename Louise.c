@@ -82,7 +82,7 @@ void print_game_menu() {
 
 /*Function to calculate the first total
 it takes the top_column of the scoreboard struct as an argument*/
-int calculate_top_sum(scoreboard top_column){
+int calculate_first_total(scoreboard top_column){
 	int top_sum = 0;
 
 	for (int i = 0; i < 6; i++)
@@ -99,7 +99,7 @@ it takes the of bonus of the scoreboard struct as an argument*/
 int calculate_bonus(scoreboard bonus_score){
 	bonus_score.score.bonus = 50;
 
-	if (calculate_top_sum(bonus_score) >= 63)
+	if (calculate_first_total(bonus_score) >= 63)
 	{
 		return bonus_score.score.bonus;
 	} else {
