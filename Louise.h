@@ -22,7 +22,6 @@ typedef struct scoreboard_column {
 	int two_pairs;
 	int three_of_a_kind;
 	int four_of_a_kind;
-	int five_of_a_kind;
 	int small_straight;
 	int large_straight;
 	int full_house;
