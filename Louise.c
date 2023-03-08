@@ -7,10 +7,10 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "Carl.h"
-#include "Cornel.h"
-#include "Louise.h"
-#include "Hanna.h"
+#include <Louise.h>
+#include <Cornel.h>
+#include <Carl.h>
+#include <Hanna.h>
 
 /*Function that calculates the sum of dicepool*/
 int sum_pool(int *dice_pool, int size) {
@@ -82,4 +82,46 @@ void print_game_menu() {
 		printf("Bye bye, hope to see you soon again");
 	}
 
+}
+
+/*Function to calculate the first total
+it takes the top_column of the scoreboard struct as an argument*/
+int calculate_first_total(scoreboard top_column){
+	int top_sum = 0;
+
+	for (int i = 0; i < 6; i++)
+	{
+		int field_value = *((int*)&top_column.score + i); //Access the i-th field in the struct
+		top_sum += field_value;
+	}
+	top_column.score.first_total = top_sum;
+	return top_sum;
+}
+
+/*Function to calculate the bonus
+it takes the of bonus of the scoreboard struct as an argument*/
+int calculate_bonus(scoreboard bonus_score){
+	bonus_score.score.bonus = 50;
+
+	if (calculate_first_total(bonus_score) >= 63)
+	{
+		return bonus_score.score.bonus;
+	} else {
+		return 0;
+	}
+}
+
+/*Function to calculate the total score
+it takes the total_score of the scoreboard struct as an argument*/
+int calculate_total_score(scoreboard bottom_column)
+{
+	int bottom_sum = bottom_column.score.first_total + bottom_column.score.bonus;
+
+	for (int i = 8; i <= 18; i++)
+	{
+		int field_value = *((int*)&bottom_column.score + i);
+		bottom_sum += field_value;
+	}
+	bottom_column.score.total_score = bottom_sum;
+	return bottom_sum;
 }

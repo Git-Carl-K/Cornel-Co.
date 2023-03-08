@@ -34,7 +34,7 @@ typedef struct scoreboard_column {
 /*Struct that contains a player-name and a scoreboard for that player*/
 typedef struct scoreboard {
 	char name[20];
-	struct scoreboard_column;
+	scoreboard_column score;
 
 }scoreboard;
 
@@ -43,3 +43,12 @@ int sum_pool(int *dice_pool, int size);
 
 /*Function to print game menu*/
 void print_game_menu();
+
+/*Function to calculate first total*/
+int calculate_first_total(scoreboard top_column);
+
+/*Function to calculate the bonus*/
+int calculate_bonus(scoreboard bonus_score);
+
+/*Function to calculate the total score*/
+int calculate_total_score(scoreboard bottom_column);

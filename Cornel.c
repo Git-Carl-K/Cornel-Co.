@@ -1,11 +1,12 @@
+
+#include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include "Cornel.h"
 #include "Louise.h"
 #include "Hanna.h"
 #include "Carl.h"
-
+#include "Cornel.h"
 
 int sum(int array [])
 {
@@ -22,13 +23,3 @@ int sum(int array [])
 }
 
 
-int main ()
-
-
-{
-
-
-
-
-
-}
