@@ -1,0 +1,6 @@
+1) printa menyn. Välj spel.
+2) skapa gamestate. Detta skall sparas till en fil. Kan läggas till i slutet. 
+3) Scoreboard för varje spel. 
+4) Dicepool. 
+5) Fyller i alla varibler scoreboard
+6) Print total score top ten. (Save high score game to file, not ready for use yet). 
