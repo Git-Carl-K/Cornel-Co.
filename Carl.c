@@ -35,29 +35,25 @@ void roll_pool(int number_of_dice, int dice_pool[])
 int save_value(int dice_pool[])
 {
 	int merged_array[5];
-	int choice;
 
-	printf("Which dice would you like to save?\n");
+
+	printf("Which dice would you like to save, separate dices with space,"
+			" 0 to discard\n");
 	fflush(stdout);
-	scanf("%d", &choice);
+	scanf("%d %d %d %d %d", &merged_array[0], &merged_array[1],&merged_array[2],
+				&merged_array[3], &merged_array[4]);
 	printf("Saved dice: \n");
 	for (int i = 0; i < 5; i++)
 	{
-		if (choice == dice_pool[i])
+		if (merged_array[i] == dice_pool[i])
 		{
-			merged_array[i] = choice;
-			printf("%d ", merged_array[i]);
-
+			printf("dice %d: %d ", i + 1, merged_array[i]);
 		}
-
-
-		//	printf("Which dice would you like to save, separate dices with space");
-		//	fflush(stdout);
-		//	scanf("%d %d %d %d %d", &merged_array[0], &merged_array[1],&merged_array[2],
-		//			&merged_array[3], &merged_array[4]);
-
 	}
-		return (0);
+
+	printf("\n");
+
+	return (0);
 }
 
 // Asks user to roll again
