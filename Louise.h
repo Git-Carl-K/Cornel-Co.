@@ -1,13 +1,3 @@
-/*
- * Louise.h
- *
- *  Created on: 7 Mar 2023
- *      Author: call3
- */
-
-#ifndef LOUISE_H_
-#define LOUISE_H_
-
 //*Structure of a yatzee-scoreboard*/
 typedef struct scoreboard_column {
 	int ones;

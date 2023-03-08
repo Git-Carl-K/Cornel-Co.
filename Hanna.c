@@ -13,7 +13,7 @@ typedef struct GameState {
 	int turn;
 	int throws_left;
 	int current_dicepool[];
-}GameState;
+} GameState;
 
 //compare function for quick sort (small to large)
 int compare_small(const void * a, const void * b)
@@ -245,7 +245,6 @@ void fill_scoreboard(GameState state, int size) {
 				break;
 			case 16:
 				state.player_scores.score.chance = sum_pool(state.current_dicepool, size);
-
 				break;
 			case 17:
 				state.player_scores.score.yatzy = x_of_a_kind(state.current_dicepool, size, 5);
