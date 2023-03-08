@@ -7,6 +7,10 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <Louise.h>
+#include <Cornel.h>
+#include <Carl.h>
+#include <Hanna.h>
 
 /*Function that calculates the sum of dicepool*/
 int sum_pool(int *dice_pool, int size) {
