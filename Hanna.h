@@ -1,3 +1,12 @@
+/*-----------------------------------STRUCT-----------------------------------*/
+typedef struct GameState {
+	scoreboard player;
+	int date;
+	int turn;
+	int throws_left;
+	int current_dicepool[];
+} GameState;
+
 /*----------------------------------FUNCTION----------------------------------*/
 int compare_small(const void * a, const void * b);
 int compare_big(const void * a, const void * b);

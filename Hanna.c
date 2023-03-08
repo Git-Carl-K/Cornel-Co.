@@ -6,15 +6,6 @@
 #include "Louise.h"
 #include "Hanna.h"
 
-//struct to save current game state
-typedef struct GameState {
-	scoreboard player_scores;
-	int date;
-	int turn;
-	int throws_left;
-	int current_dicepool[];
-} GameState;
-
 //compare function for quick sort (small to large)
 int compare_small(const void * a, const void * b)
 {
@@ -198,62 +189,78 @@ int check_full_house(int dice_pool[], int size) {
 void fill_scoreboard(GameState state, int size) {
 	for (int i = 1; i < 19; i++) {
 		switch (i) {
-			case 1:
-				state.player_scores.score.ones = find(state.current_dicepool, size, i);
-				break;
-			case 2:
-				state.player_scores.score.twos = find(state.current_dicepool, size, i);
-				break;
-			case 3:
-				state.player_scores.score.threes = find(state.current_dicepool, size, i);
-				break;
-			case 4:
-				state.player_scores.score.fours = find(state.current_dicepool, size, i);
-				break;
-			case 5:
-				state.player_scores.score.fives = find(state.current_dicepool, size, i);
-				break;
-			case 6:
-				state.player_scores.score.sixes = find(state.current_dicepool, size, i);
-				break;
-			case 7:
-				state.player_scores.score.first_total = calculate_first_total(state.player_scores.score);
-				break;
-			case 8:
-				state.player_scores.score.bonus = calculate_bonus(state.player_scores.score);
-				break;
-			case 9:
-				state.player_scores.score.pair = check_pairs(state.current_dicepool, size, 1);
-				break;
-			case 10:
-				state.player_scores.score.two_pairs = check_pairs(state.current_dicepool, size, 2);
-				break;
-			case 11:
-				state.player_scores.score.three_of_a_kind = x_of_a_kind(state.current_dicepool, size, 3);
-				break;
-			case 12:
-				state.player_scores.score.four_of_a_kind = x_of_a_kind(state.current_dicepool, size, 4);
-				break;
-			case 13:
-				state.player_scores.score.small_straight = check_small_straigt(state.current_dicepool, size);
-				break;
-			case 14:
-				state.player_scores.score.large_straight = check_large_straigt(state.current_dicepool, size);
-				break;
-			case 15:
-				state.player_scores.score.full_house = check_full_house(state.current_dicepool, size);
-				break;
-			case 16:
-				state.player_scores.score.chance = sum_pool(state.current_dicepool, size);
-				break;
-			case 17:
-				state.player_scores.score.yatzy = x_of_a_kind(state.current_dicepool, size, 5);
-				break;
-			case 18:
-				state.player_scores.score.total_score = calculate_total_score(state.player_scores.score);
-				break;
-			default:
-				break;
+		case 1:
+			state.player.score.ones = find(state.current_dicepool, size, i);
+			break;
+		case 2:
+			state.player.score.twos = find(state.current_dicepool, size, i);
+			break;
+		case 3:
+			state.player.score.threes = find(state.current_dicepool, size, i);
+			break;
+		case 4:
+			state.player.score.fours = find(state.current_dicepool, size, i);
+			break;
+		case 5:
+			state.player.score.fives = find(state.current_dicepool, size, i);
+			break;
+		case 6:
+			state.player.score.sixes = find(state.current_dicepool, size, i);
+			break;
+		case 7:
+			state.player.score.first_total = calculate_first_total(state.player);
+			break;
+		case 8:
+			state.player.score.bonus = calculate_bonus(state.player);
+			break;
+		case 9:
+			state.player.score.pair = check_pairs(state.current_dicepool, size, 1);
+			break;
+		case 10:
+			state.player.score.two_pairs = check_pairs(state.current_dicepool, size, 2);
+			break;
+		case 11:
+			state.player.score.three_of_a_kind = x_of_a_kind(state.current_dicepool, size, 3);
+			break;
+		case 12:
+			state.player.score.four_of_a_kind = x_of_a_kind(state.current_dicepool, size, 4);
+			break;
+		case 13:
+			state.player.score.small_straight = check_small_straigt(state.current_dicepool, size);
+			break;
+		case 14:
+			state.player.score.large_straight = check_large_straigt(state.current_dicepool, size);
+			break;
+		case 15:
+			state.player.score.full_house = check_full_house(state.current_dicepool, size);
+			break;
+		case 16:
+			state.player.score.chance = sum_pool(state.current_dicepool, size);
+			break;
+		case 17:
+			state.player.score.yatzy = x_of_a_kind(state.current_dicepool, size, 5);
+			break;
+		case 18:
+			state.player.score.total_score = calculate_total_score(state.player);
+			break;
+		default:
+			break;
 		}
+		state.turn = 1;
+		state.throws_left = 2;
 	}
 }
+
+//void start_new(int game_mode) {
+//	if (game_mode == 1) {
+//		GameState current_game = {
+//			.date = time(NULL),
+//			.turn = 1,
+//			//throws_left = 2;
+//			//current_dicepool[] = roll_pool();
+//		};
+//		//save_dice(current_game.curent_dicepool);
+//	} else {
+//		printf("Under development...");
+//	}
+//}
