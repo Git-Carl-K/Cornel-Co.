@@ -195,7 +195,7 @@ int check_full_house(int dice_pool[], int size) {
 //*parameters:
 //(1) GameState struct for the player
 //returns the points collected
-void fill_scoreboard(GameState state, size) {
+void fill_scoreboard(GameState state, int size) {
 	for (int i = 1; i < 19; i++) {
 		switch (i) {
 			case 1:
@@ -217,10 +217,10 @@ void fill_scoreboard(GameState state, size) {
 				state.player_scores.score.sixes = find(state.current_dicepool, size, i);
 				break;
 			case 7:
-				//total top
+				state.player_scores.score.first_total = calculate_first_total(state.player_scores.score);
 				break;
 			case 8:
-				//bonus
+				state.player_scores.score.bonus = calculate_bonus(state.player_scores.score);
 				break;
 			case 9:
 				state.player_scores.score.pair = check_pairs(state.current_dicepool, size, 1);
@@ -244,13 +244,14 @@ void fill_scoreboard(GameState state, size) {
 				state.player_scores.score.full_house = check_full_house(state.current_dicepool, size);
 				break;
 			case 16:
-				//chance
+				state.player_scores.score.chance = sum_pool(state.current_dicepool, size);
+
 				break;
 			case 17:
 				state.player_scores.score.yatzy = x_of_a_kind(state.current_dicepool, size, 5);
 				break;
 			case 18:
-				//total
+				state.player_scores.score.total_score = calculate_total_score(state.player_scores.score);
 				break;
 			default:
 				break;
