@@ -135,7 +135,7 @@ void quit_game()
 	if (current_game->num_of_players == 0)
 	{
 		printf("-----------------------------\n");
-		printf("            Good bye         \n");
+		printf("          Good bye!          \n");
 		printf("-----------------------------\n");
 	}
 	//free all allocated memory
