@@ -18,116 +18,92 @@ int roll_dice()
 //Roll pool of dice initialized to 0 within dice array
 int roll_pool(int dice_pool[])
 {
-	static int merged_array[5];
-	jump:
-	printf("Rolling pool\n");
-	fflush(stdout);
-	for (int i = 0; i < 5; i++)
-	{
-		if(dice_pool[i] == 0)
-		{
-			dice_pool[i] = roll_dice();
-			printf("%d ", dice_pool[i]);
-			fflush(stdout);
-		}
-		else if(merged_array[i] == 0)
-		{
-			merged_array[i] = roll_dice();
-			printf("%d " , merged_array[i]);
-			fflush(stdout);
-		}
-
-	}
-
-	if (rounds == 0)
-	{
-		qsort(dice_pool, 5, sizeof(int), compare_small);
-	}
-	else if (rounds > 0)
-	{
-		qsort(merged_array, 5, sizeof(int), compare_small);
-	}
-	printf("\n Sorted: \n");
-	fflush(stdout);
-	if (rounds == 0)
-	{
-		for (int i = 0; i < 5; i++)
-		{
-			printf("%d ", dice_pool[i]);
-			fflush(stdout);
-		}
-	}
-	else if (rounds > 0)
-	{
-		for (int i = 0; i < 5; i++)
-		{
-			printf("%d ", merged_array[i]);
-			fflush(stdout);
-		}
-	}
-	printf("\n");
-	fflush(stdout);
-	int i = 0;
-
-	printf("Which dice would you like to save, separate dices with space,"
-			" 0 to discard\n");
-	fflush(stdout);
-	scanf("%d %d %d %d %d", &merged_array[0], &merged_array[1],&merged_array[2],
-			&merged_array[3], &merged_array[4]);
-	printf("Saved dice: \n");
-	fflush(stdout);
-	for (i = 0; i < 5; i++)
-	{
-		if (merged_array[i] == dice_pool[i])
-		{
-			printf("%d ", merged_array[i]);
-			fflush(stdout);
-		}
-
-	}
-	int throws_left = 0;
-	rounds++;
-
-	printf("\n");
-	fflush(stdout);
-	for (int j = 0; j < 5; j++)
-	{
-		if (merged_array[j] == 0)
-		{
-			throws_left++;
-		}
-	}
-	printf("Dice left to throw: %d\n", throws_left);
-	fflush(stdout);
-	printf("Do you wish to roll again? y/n \n");
-	fflush(stdout);
-	char choice[3];
-	scanf("%s", choice);
-	if (rounds != 2)
-	{
-
-		if (strcmp(choice, "y") == 0)
-		{
-			goto jump;
-		}
-	}
-	if (strcmp(choice, "n") == 0)
-	{
-		printf("You have rolled: %d %d %d %d %d\n", merged_array[0],
-				merged_array[1], merged_array[2],
-				merged_array[3], merged_array[4]);
-
-
-	}
-	if (rounds == 3)
-	{
-		printf("You have reached maximum amount of turns\n");
-	}
-	printf("You have reached maximum amount of turns\n");
-	printf("You have rolled: %d %d %d %d %d\n", merged_array[0],
-					merged_array[1], merged_array[2],
-					merged_array[3], merged_array[4]);
-	return(0);
+    static int merged_array[5];
+    printf("Rolling pool\n");
+    fflush(stdout);
+    for (int i = 0; i < 5; i++)
+    {
+        if(dice_pool[i] == 0)
+        {
+            dice_pool[i] = roll_dice();
+        }
+        merged_array[i] = 0; // initialize merged_array to 0
+        printf("%d ", dice_pool[i]);
+        fflush(stdout);
+    }
+    printf("\n");
+    fflush(stdout);
+    int throws_left = 3; // set throws_left to 3
+    int rounds = 1;
+    while (rounds <= 3 && throws_left > 0)
+    {
+        printf("Which dice would you like to save, separate dices with space,"
+                " 0 to discard\n");
+        fflush(stdout);
+        scanf("%d %d %d %d %d", &merged_array[0], &merged_array[1],&merged_array[2],
+                &merged_array[3], &merged_array[4]);
+        printf("Saved dice: \n");
+        fflush(stdout);
+        for (int i = 0; i < 5; i++)
+        {
+            if (merged_array[i] == dice_pool[i])
+            {
+                printf("%d ", merged_array[i]);
+                fflush(stdout);
+            }
+            else
+            {
+                merged_array[i] = 0; // discard any dice not saved
+            }
+        }
+        throws_left--;
+        printf("\n");
+        fflush(stdout);
+        for (int j = 0; j < 5; j++)
+        {
+            if (merged_array[j] == 0)
+            {
+                merged_array[j] = roll_dice(); // roll any dice not saved
+                printf("%d ", merged_array[j]);
+                fflush(stdout);
+            }
+            dice_pool[j] = merged_array[j]; // copy rolled dice to dice_pool
+        }
+        printf("\n");
+        fflush(stdout);
+        qsort(dice_pool, 5, sizeof(int), compare_small);
+        printf("Sorted: \n");
+        for (int i = 0; i < 5; i++)
+        {
+            printf("%d ", dice_pool[i]);
+            fflush(stdout);
+        }
+        printf("\n");
+        fflush(stdout);
+        if (rounds == 3)
+        {
+            printf("You have reached maximum amount of turns\n");
+        }
+        else if (throws_left == 0)
+        {
+            printf("You have used up all your throws\n");
+        }
+        else
+        {
+            printf("Do you wish to roll again? y/n \n");
+            fflush(stdout);
+            char choice[3];
+            scanf("%s", choice);
+            if (strcmp(choice, "n") == 0)
+            {
+                break;
+            }
+        }
+        rounds++;
+    }
+    printf("You have rolled: %d %d %d %d %d\n", dice_pool[0],
+            dice_pool[1], dice_pool[2], dice_pool[3], dice_pool[4]);
+    return(0);
 }
 
 // Plocka ut roll again funktionen för att inte hamna i en loooooooop
