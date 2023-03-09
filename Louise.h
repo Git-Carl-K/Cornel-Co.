@@ -42,3 +42,6 @@ int calculate_bonus(scoreboard bonus_score);
 
 /*Function to calculate the total score*/
 int calculate_total_score(scoreboard bottom_column);
+
+/*Function to quit game*/
+void quit_game();
