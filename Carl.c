@@ -38,13 +38,32 @@ int roll_pool(int dice_pool[])
 		}
 
 	}
-	qsort(dice_pool, 5, sizeof(int), compare_small);
+
+	if (rounds == 0)
+	{
+		qsort(dice_pool, 5, sizeof(int), compare_small);
+	}
+	else if (rounds > 0)
+	{
+		qsort(merged_array, 5, sizeof(int), compare_small);
+	}
 	printf("\n Sorted: \n");
 	fflush(stdout);
-	for (int i = 0; i < 5; i++)
+	if (rounds == 0)
 	{
-		printf("%d ", dice_pool[i]);
-		fflush(stdout);
+		for (int i = 0; i < 5; i++)
+		{
+			printf("%d ", dice_pool[i]);
+			fflush(stdout);
+		}
+	}
+	else if (rounds > 0)
+	{
+		for (int i = 0; i < 5; i++)
+		{
+			printf("%d ", merged_array[i]);
+			fflush(stdout);
+		}
 	}
 	printf("\n");
 	fflush(stdout);
@@ -67,6 +86,7 @@ int roll_pool(int dice_pool[])
 
 	}
 	int throws_left = 0;
+	rounds++;
 
 	printf("\n");
 	fflush(stdout);
@@ -77,7 +97,6 @@ int roll_pool(int dice_pool[])
 			throws_left++;
 		}
 	}
-	rounds++;
 	printf("Dice left to throw: %d\n", throws_left);
 	fflush(stdout);
 	printf("Do you wish to roll again? y/n \n");
@@ -102,8 +121,12 @@ int roll_pool(int dice_pool[])
 	}
 	if (rounds == 3)
 	{
-	printf("You have reached maximum amount of turns\n");
+		printf("You have reached maximum amount of turns\n");
 	}
+	printf("You have reached maximum amount of turns\n");
+	printf("You have rolled: %d %d %d %d %d\n", merged_array[0],
+					merged_array[1], merged_array[2],
+					merged_array[3], merged_array[4]);
 	return(0);
 }
 
