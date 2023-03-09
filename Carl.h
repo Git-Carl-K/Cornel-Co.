@@ -10,7 +10,7 @@
 
 
 int roll_dice();
-void roll_pool(int dice_pool[]);
+int roll_pool(int dice_pool[]);
 void save_value(int dice_pool[]);
 int compare_int(const void * a, const void * b);
 void score_board();
