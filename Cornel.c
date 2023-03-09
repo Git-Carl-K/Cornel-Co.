@@ -84,6 +84,43 @@ void load_highscore(top_ten *players)
 
 }
 
+void add_to_highscore(top_ten *players, score_board to_add)
+{
+    // find which place to put the new score by comparing with placements in the highscore
+    // We start with last place and work our way up the highscore
+	//We want to use pos later, so we declare it outside of the loop
+	int pos;
+
+    for (pos = 9; pos > 0; pos--)
+    {
+        // If the new player has less points than this placement on the highscore, we stop
+        if (players[pos].score > to_add.scores.total_score)
+        {
+            pos++; //go back down one step on the highscore
+            break;
+        }
+    }
+
+    //Pos now contains the index where we want to insert the new score
+    //But before we do, we need to move all the other values to make room
+
+    // We start by moving the score in 9th place to 10th place and work our way up
+    for (int i = 8; i >= pos; i--)
+    {
+        // For instance the 8th position moves to 9th position and so on
+        players[i+1] = players[i];
+    }
+
+    // Once all the players are moved, we write the new player to our highscore
+    // His name and score can be found in the scoreboard
+
+    strcpy(players[pos].name, to_add.name);
+    players[pos].score = to_add.scores.total_score;
+
+    //Since players is a pointer we don't need to return anything. Changes happens directly
+    //to the array we sent into this function.
+}
+
 /* SAVE TO TEXTFILE
  * This function takes the players top_ten struct array and prints it out to a textfile
  * top_ten players [] = the struct array located in main and holds
@@ -223,7 +260,13 @@ int main ()
 
 	top_ten fromfile [10];
 
-
+//    score_board current_player;
+//    strcpy(current_player.name,"Per");
+//    current_player.scores.total_score = 90;
+//
+//    add_to_highscore(players, current_player);
+//
+//    print_top_ten(players);
 
 	return 0;
 }
