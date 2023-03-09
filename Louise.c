@@ -125,3 +125,43 @@ int calculate_total_score(scoreboard bottom_column)
 	bottom_column.score.total_score = bottom_sum;
 	return bottom_sum;
 }
+
+/*Function to quit game*/
+void quit_game()
+{
+	printf("-----------------------------\n");
+	printf("        Quitting game        \n");
+	printf("-----------------------------\n");
+	if (current_game->num_of_players == 0)
+	{
+		printf("-----------------------------\n");
+		printf("            Good bye         \n");
+		printf("-----------------------------\n");
+	}
+	//free all allocated memory
+	//current_game->players = malloc(sizeof(scoreboard));
+
+	if (current_game->num_of_players != 0)
+	{
+		char choice = 'n';
+		printf("-----------------------------\n");
+		printf("Would you like to save? (y/n)\n", choice);
+		printf("-----------------------------\n");
+		fflush(stdout);
+		scanf("%c", &choice);
+		if (choice == 'y')
+		{
+			//call save game function
+			save_game();
+		}
+		else
+		{
+			printf("-----------------------------\n");
+			printf("Good bye, thanks for playing!\n");
+			printf("-----------------------------\n");
+		}
+		printf("\n\n");
+	}
+
+	free(current_game->players);
+}
