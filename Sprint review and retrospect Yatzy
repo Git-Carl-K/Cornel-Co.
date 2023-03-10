@@ -1,0 +1,66 @@
+Sprint review
+
+	• Körschema
+	Vad ska vi visa?
+	
+	• Vilken ordning?
+		○ Cool menu
+		○ Options to choose game and show high scoreboard
+		○ Just single player at this moment
+		○ Throw dice 3 times and choose the combination to save
+		○ Quit game
+		
+	
+	• Vilka inmatningar och värden?
+
+
+	• Vilka designbeslut har tagits?
+		○ Strict game
+		○ Hard code to make all functions work
+		○ Not fully scalabe at this moment.
+		○ Snake case naming variables
+		○ Go back and forth in game menu
+		○ Show scoreboard after each turn
+		
+
+
+	• Om vi skulle ha fått 1v till, vad skulle vi vilja lägga till?
+		○ Save gamestate and load game 
+		○ Multi player
+		○ Improved user experience
+		○ Error handling
+		○ Bug fixing
+		○ Flexible gamemode
+		
+
+Sprint retrospekt
+
+Vad har funkat bra? 
+
+	• Teamwork
+		○ Communication
+		○ Collaboration
+		○ Prioritized different functions to make things work according to plan
+	
+	
+
+Vad har funkat mindre bra? 
+
+	• Jira and working with backlogg and sprints
+	• Reviewing each others code
+	• 
+
+
+Vad skulle vi göra annorlunda nästa gång? 
+
+	• Create and discuss the plan in detail
+	• Better planning for sprints 
+	• Adhering to the way of working document
+	• Adapting the plan continually 
+	
+
+
+	
+
+
+
