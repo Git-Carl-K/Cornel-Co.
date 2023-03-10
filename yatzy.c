@@ -5,10 +5,8 @@
 #include <stdbool.h>
 #include "yatzy.h"
 
-top_ten players[10];
-top_ten fromfile[10];
-
 void play_yatsy() {
+	top_ten players[10];
 	load_highscore(players);
 	GameState current_game;
 	GameState *p_gamestate = &current_game;
@@ -122,31 +120,31 @@ void quit_game(GameState *current_game) {
 		printf("-----------------------------\n");
 		fflush(stdout);
 	}
-	if (current_game->num_of_players != 0)
-	{
-		char choice = 'n';
-		printf("-----------------------------\n");
-		printf("Would you like to save? (y/n)\n");
-		printf("-----------------------------\n");
-		fflush(stdout);
-		scanf("%c", &choice);
-		if (choice == 'y')
-		{
-			//call save game function
-			save_game();
-			printf("-----------------------------\n");
-			printf("Game has been saved!         \n");
-			printf("Good bye, thanks for playing!\n");
-			printf("-----------------------------\n");
-		}
-		else
-		{
-			printf("-----------------------------\n");
-			printf("Good bye, thanks for playing!\n");
-			printf("-----------------------------\n");
-		}
-		printf("\n\n");
-	}
+//	if (current_game->num_of_players != 0)
+//	{
+//		char choice = 'n';
+//		printf("-----------------------------\n");
+//		printf("Would you like to save? (y/n)\n");
+//		printf("-----------------------------\n");
+//		fflush(stdout);
+//		scanf("%c", &choice);
+//		if (choice == 'y')
+//		{
+//			//call save game function
+//			save_game();
+//			printf("-----------------------------\n");
+//			printf("Game has been saved!         \n");
+//			printf("Good bye, thanks for playing!\n");
+//			printf("-----------------------------\n");
+//		}
+//		else
+//		{
+//			printf("-----------------------------\n");
+//			printf("Good bye, thanks for playing!\n");
+//			printf("-----------------------------\n");
+//		}
+//		printf("\n\n");
+//	}
 
 	free(current_game->players);
 }
@@ -263,7 +261,7 @@ int x_of_a_kind(int dice_pool[], int x_of_a_kind) {
 	int points = 0;
 	if (x_of_a_kind != 5) {
 		for (int i = 0; i < size; i++) {
-			if ((find(dice_pool, dice_pool[i]) / dice_pool[i]) == x_of_a_kind) {
+			if ((find(dice_pool, dice_pool[i]) / dice_pool[i]) >= x_of_a_kind) {
 				points += (dice_pool[i] * x_of_a_kind);
 				return points;
 			}
@@ -502,107 +500,53 @@ int roll_dice()
 }
 
 //Roll pool of dice initialized to 0 within dice array
-int roll_pool(GameState *current_game)
+void roll_pool(GameState *current_game)
 {
-	static int merged_array[5];
-	printf("Rolling pool\n");
-	fflush(stdout);
-
 	int rounds = 1;
-	for (int i = 0; i < 5; i++)
-	{
-		if(current_game->current_dicepool[i] == 0)
+
+	while (rounds < 4) {
+		for (int i = 0; i < 5; i++)
 		{
-			current_game->current_dicepool[i] = roll_dice();
-		}
-		merged_array[i] = 0; // initialize merged_array to 0
-		if (rounds <= 1) {
-			printf("%d ", current_game->current_dicepool[i]);
-			fflush(stdout);
-		}
-	}
-	printf("\n");
-	fflush(stdout);
-	int throws_left = 3; // set throws_left to 3
-	while (rounds <= 3 && throws_left > 0)
-	{
-		printf("\nWhich dice would you like to save, separate dices with space,"
-				" 0 to discard\n");
-		fflush(stdout);
-		scanf("%d %d %d %d %d", &merged_array[0], &merged_array[1],&merged_array[2],
-				&merged_array[3], &merged_array[4]);
-		//		for (int i = 0; i < 5; i++)
-		//		{
-		//			if (merged_array[i] == current_game->current_dicepool[i])
-		//			{
-		//				printf("%d ", merged_array[i]);
-		//				fflush(stdout);
-		//			}
-		//			else
-		//			{
-		//				merged_array[i] = 0; // discard any dice not saved
-		//			}
-		//		}
-		throws_left--;
-		printf("\n");
-		//		printf("Rolling dice:\n");
-		fflush(stdout);
-		for (int j = 0; j < 5; j++)
-		{
-			if (merged_array[0] != 0 && merged_array[1] != 0 &&
-					merged_array[2] != 0 && merged_array[3] != 0 &&
-					merged_array[4] != 0) {
-				goto jump;
-			}
-			if (merged_array[j] == 0)
+			if(current_game->current_dicepool[i] == 0)
 			{
-				merged_array[j] = roll_dice(); // roll any dice not saved
+				current_game->current_dicepool[i] = roll_dice();
 			}
-			current_game->current_dicepool[j] = merged_array[j]; // copy rolled dice to dice_pool
 		}
 
-		for (int j = 0; j < 5; j++) {
-			printf("%d ", merged_array[j]);
+		printf("\nRolling pool");
+		printf("\nThrow %d/3\n", rounds);
+
+		if (rounds < 3) {
 			fflush(stdout);
-		}
+			for (int i = 0; i < 5; i++)
+			{
+				printf("%d ", current_game->current_dicepool[i]);
+				fflush(stdout);
+			}
 
-		printf("\n");
-		fflush(stdout);
-		//		qsort(current_game->current_dicepool, 5, sizeof(int), compare_small);
-		//		printf("Sorted: \n");
-		//		for (int i = 0; i < 5; i++)
-		//		{
-		//			printf("%d ", current_game->current_dicepool[i]);
-		//			fflush(stdout);
-		//		}
-		printf("\n");
-		fflush(stdout);
-		if (rounds == 3)
-		{
+			printf("\nWhich dice would you like to save, separate dices with space,"
+					" 0 to discard\n");
+			fflush(stdout);
+			scanf("%d %d %d %d %d", &current_game->current_dicepool[0],
+					&current_game->current_dicepool[1], &current_game->current_dicepool[2],
+					&current_game->current_dicepool[3], &current_game->current_dicepool[4]);
+
+			if (current_game->current_dicepool[0] != 0 && current_game->current_dicepool[1] != 0 &&
+					current_game->current_dicepool[2] != 0 && current_game->current_dicepool[3] != 0 &&
+					current_game->current_dicepool[4] != 0) {
+				printf("Final dice pool: %d %d %d %d %d\n", current_game->current_dicepool[0],
+						current_game->current_dicepool[1], current_game->current_dicepool[2],
+						current_game->current_dicepool[3], current_game->current_dicepool[4]);
+				return;
+			}
+		} else {
 			printf("You have reached maximum amount of turns\n");
+			printf("Final dice pool: %d %d %d %d %d\n", current_game->current_dicepool[0],
+					current_game->current_dicepool[1], current_game->current_dicepool[2],
+					current_game->current_dicepool[3], current_game->current_dicepool[4]);
 		}
-		else if (throws_left == 0)
-		{
-			printf("You have used up all your throws\n");
-		}
-		//		else
-		//		{
-		//			printf("Do you wish to roll again? y/n \n");
-		//			fflush(stdout);
-		//			char choice[3];
-		//			scanf("%s", choice);
-		//			if (strcmp(choice, "n") == 0)
-		//			{
-		//				break;
-		//			}
-		//		}
 		rounds++;
 	}
-	jump:
-	printf("Final dice pool: %d %d %d %d %d\n", current_game->current_dicepool[0],
-			current_game->current_dicepool[1], current_game->current_dicepool[2],
-			current_game->current_dicepool[3], current_game->current_dicepool[4]);
-	return(0);
 }
 
 void print_scoreboard(GameState *current_game) {
@@ -629,28 +573,30 @@ void print_scoreboard(GameState *current_game) {
 }
 
 void preset_scoreboard(GameState *current_game) {
-	current_game->players->score.ones = 0;
-	current_game->players->score.twos = 0;
-	current_game->players->score.threes = 0;
-	current_game->players->score.fours = 0;
-	current_game->players->score.fives = 0;
-	current_game->players->score.sixes = 0;
-	current_game->players->score.first_total = 0;
-	current_game->players->score.bonus = 0;
-	current_game->players->score.pair = 0;
-	current_game->players->score.two_pairs = 0;
-	current_game->players->score.three_of_a_kind = 0;
-	current_game->players->score.four_of_a_kind = 0;
-	current_game->players->score.small_straight = 0;
-	current_game->players->score.large_straight = 0;
-	current_game->players->score.full_house = 0;
-	current_game->players->score.chance = 0;
-	current_game->players->score.yatzy = 0;
-	current_game->players->score.total_score = 0;
+	current_game->players[current_game->num_of_players - 1].score.ones = 0;
+	current_game->players[current_game->num_of_players - 1].score.twos = 0;
+	current_game->players[current_game->num_of_players - 1].score.threes = 0;
+	current_game->players[current_game->num_of_players - 1].score.fours = 0;
+	current_game->players[current_game->num_of_players - 1].score.fives = 0;
+	current_game->players[current_game->num_of_players - 1].score.sixes = 0;
+	current_game->players[current_game->num_of_players - 1].score.first_total = 0;
+	current_game->players[current_game->num_of_players - 1].score.bonus = 0;
+	current_game->players[current_game->num_of_players - 1].score.pair = 0;
+	current_game->players[current_game->num_of_players - 1].score.two_pairs = 0;
+	current_game->players[current_game->num_of_players - 1].score.three_of_a_kind = 0;
+	current_game->players[current_game->num_of_players - 1].score.four_of_a_kind = 0;
+	current_game->players[current_game->num_of_players - 1].score.small_straight = 0;
+	current_game->players[current_game->num_of_players - 1].score.large_straight = 0;
+	current_game->players[current_game->num_of_players - 1].score.full_house = 0;
+	current_game->players[current_game->num_of_players - 1].score.chance = 0;
+	current_game->players[current_game->num_of_players - 1].score.yatzy = 0;
+	current_game->players[current_game->num_of_players - 1].score.total_score = 0;
 }
 
 void start_game(GameState *current_game){
 	printf("Game starting...");
+	top_ten players[10];
+	top_ten fromfile[10];
 	int choice;
 	while (current_game->turn < 19) {
 		if (current_game->turn == 7 || current_game->turn == 8 || current_game->turn == 18) {
@@ -669,6 +615,10 @@ void start_game(GameState *current_game){
 				roll_pool(current_game);
 				fill_scoreboard(current_game);
 				print_scoreboard(current_game);
+				for (int i = 0; i < 5; i++)
+				{
+					current_game->current_dicepool[i] = 0;
+				}
 			}
 		} else if(choice == 2) {
 			quit_game(current_game);
@@ -676,7 +626,9 @@ void start_game(GameState *current_game){
 		current_game->turn++;
 	}
 
-	add_to_highscore(players, *current_game->players);
+	Scoreboard *p_scoreboard = current_game->players;
+
+	add_to_highscore(players, p_scoreboard);
 	save_top_ten("highscore.txt", players);
 	read_top_ten ("highscore.txt",  fromfile);
 

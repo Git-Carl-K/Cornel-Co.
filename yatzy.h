@@ -1,4 +1,5 @@
 #define size 5
+
 /*-----------------------------------STRUCT-----------------------------------*/
 typedef struct ScoreboardColumn {
 	int ones;
